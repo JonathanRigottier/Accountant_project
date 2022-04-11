@@ -41,17 +41,32 @@ public class Main {
         items1.add(tv);
         items1.add(tv);
         items1.add(smartphone);
-        Invoice invoice1 = new Invoice("ABC-0001", items1);
+        try {
+            Invoice debitInvoice1 = new DebitInvoice("ABC-0001", items1);
+            System.out.println("Invoice 1 : " + debitInvoice1.getNumber() + ", amount = " + debitInvoice1.getAmountToPay());
+        } catch (InvoiceNumberTooLongException e){
+            System.out.println(e.getMessage());
+        }
 
         List<Item> items2 = new ArrayList<>();
         items2.add(table);
         items2.add(tv);
         items2.add(laptop);
-        Invoice invoice2 = new Invoice("ABC-00021952952929", items2, Discount.TEN_PERCENT);
+        try {
+            Invoice debitInvoice2 = new DebitInvoice("ABC-00021952952929", items2, Discount.TEN_PERCENT);
+            System.out.println("Invoice 2 : " + debitInvoice2.getNumber() + ", amount = " + debitInvoice2.getAmountToPay());
+        } catch (InvoiceNumberTooLongException e){
+            System.out.println(e.getMessage());
+        }
 
         List<Item> items3 = new ArrayList<>();
         items3.add(smartphone);
-        Invoice invoice3 = new Invoice("ABC-151961665166515615", items3, Discount.TWENTY_FIVE_PERCENT);
+        try {
+            Invoice debitInvoice3 = new DebitInvoice("ABC-151961665166515615", items3, Discount.TWENTY_FIVE_PERCENT);
+            System.out.println("Invoice 3 : " + debitInvoice3.getNumber() + ", amount = " + debitInvoice3.getAmountToPay());
+        } catch (InvoiceNumberTooLongException e){
+            System.out.println(e.getMessage());
+        }
 
         List<Item> items4 = new ArrayList<>();
         items4.add(table);
@@ -59,11 +74,15 @@ public class Main {
         items4.add(table);
         items4.add(laptop);
         items4.add(laptop);
-        Invoice invoice4 = new Invoice("ABC-151", items4, Discount.FIFTY_PERCENT);
+        try {
+            DebitInvoice debitInvoice4 = new DebitInvoice("ABC-151", items4, Discount.FIFTY_PERCENT);
+            System.out.println("Invoice 4 : " + debitInvoice4.getNumber() + ", amount = " + debitInvoice4.getAmountToPay());
 
-        System.out.println("Invoice 1 : " + invoice1.getNumber() + ", amount = " + invoice1.getAmountToPay());
-        System.out.println("Invoice 2 : " + invoice2.getNumber() + ", amount = " + invoice2.getAmountToPay());
-        System.out.println("Invoice 3 : " + invoice3.getNumber() + ", amount = " + invoice3.getAmountToPay());
-        System.out.println("Invoice 4 : " + invoice4.getNumber() + ", amount = " + invoice4.getAmountToPay());
+            Invoice creditInvoice4 = new CreditInvoice("CRE-0001", debitInvoice4);
+            System.out.println("creditInvoice 4 : " + creditInvoice4.getNumber() + ", amount = " + creditInvoice4.getAmountToPay());
+        } catch (InvoiceNumberTooLongException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 }
