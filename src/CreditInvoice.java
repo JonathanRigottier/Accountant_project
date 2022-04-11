@@ -10,7 +10,7 @@ public class CreditInvoice extends Invoice {
     }
 
     @Override
-    public double getAmountToPay() {
+    public double getAmountToPay() throws DiscountIsInvalid {
         return debitInvoice.getAmountToPay() * -1;
     }
 

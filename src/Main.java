@@ -44,7 +44,7 @@ public class Main {
         try {
             Invoice debitInvoice1 = new DebitInvoice("ABC-0001", items1);
             System.out.println("Invoice 1 : " + debitInvoice1.getNumber() + ", amount = " + debitInvoice1.getAmountToPay());
-        } catch (InvoiceNumberTooLongException e){
+        } catch (InvoiceNumberTooLongException | DiscountIsInvalid e){
             System.out.println(e.getMessage());
         }
 
@@ -53,9 +53,9 @@ public class Main {
         items2.add(tv);
         items2.add(laptop);
         try {
-            Invoice debitInvoice2 = new DebitInvoice("ABC-00021952952929", items2, Discount.TEN_PERCENT);
+            Invoice debitInvoice2 = new DebitInvoice("ABC-00021952952929", items2, Discount.SIXTY_PERCENT);
             System.out.println("Invoice 2 : " + debitInvoice2.getNumber() + ", amount = " + debitInvoice2.getAmountToPay());
-        } catch (InvoiceNumberTooLongException e){
+        } catch (InvoiceNumberTooLongException | DiscountIsInvalid e){
             System.out.println(e.getMessage());
         }
 
@@ -64,7 +64,7 @@ public class Main {
         try {
             Invoice debitInvoice3 = new DebitInvoice("ABC-151961665166515615", items3, Discount.TWENTY_FIVE_PERCENT);
             System.out.println("Invoice 3 : " + debitInvoice3.getNumber() + ", amount = " + debitInvoice3.getAmountToPay());
-        } catch (InvoiceNumberTooLongException e){
+        } catch (InvoiceNumberTooLongException | DiscountIsInvalid e){
             System.out.println(e.getMessage());
         }
 
@@ -80,7 +80,7 @@ public class Main {
 
             Invoice creditInvoice4 = new CreditInvoice("CRE-0001", debitInvoice4);
             System.out.println("creditInvoice 4 : " + creditInvoice4.getNumber() + ", amount = " + creditInvoice4.getAmountToPay());
-        } catch (InvoiceNumberTooLongException e){
+        } catch (InvoiceNumberTooLongException | DiscountIsInvalid e){
             System.out.println(e.getMessage());
         }
 

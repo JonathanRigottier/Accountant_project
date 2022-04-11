@@ -5,7 +5,7 @@ public class DebitInvoice extends Invoice {
     private List<Item> items;
     private Discount discount;
 
-    public DebitInvoice(String number, List<Item> items, Discount discount)throws InvoiceNumberTooLongException{
+    public DebitInvoice(String number, List<Item> items, Discount discount)throws InvoiceNumberTooLongException, DiscountIsInvalid{
         super(number);
         this.items = items;// class field and constructor's 2-nd parameter have the same name :
                                        // 'this' means that we are refering to the field of this particular instance (object)
@@ -14,17 +14,17 @@ public class DebitInvoice extends Invoice {
         setDiscount(discount);
     }
 
-    public DebitInvoice(String number, List<Item> items) throws InvoiceNumberTooLongException {
+    public DebitInvoice(String number, List<Item> items) throws InvoiceNumberTooLongException, DiscountIsInvalid {
         this(number, items, Discount.NO_DISCOUNT);   // A call to the upper constructor
     }
 
 
-    public void setDiscount(Discount discount){
+    public void setDiscount(Discount discount) {
         this.discount = discount;
     }
 
     @Override
-    public double getAmountToPay(){
+    public double getAmountToPay() throws DiscountIsInvalid {
         double totalPrice = calculateTotalPrice();
         return totalPrice - totalPrice * discount.getPercentage();
     }

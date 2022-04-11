@@ -19,6 +19,6 @@ public abstract class Invoice {
         this.number = number;
     }
 
-    public abstract double getAmountToPay ();
+    public abstract double getAmountToPay () throws DiscountIsInvalid ;
 
 }
